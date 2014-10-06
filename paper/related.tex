@@ -1,0 +1,20 @@
+\section {Related Work}\label{sec:related}
+%\noindent {\textbf{Example-based Systematic Editing} } 
+%J.Andersen et al. \cite{andersen:generic, andersen:semantic}
+
+%%start from related work
+\noindent {\textbf{Naming Pattern}}
+Lawrie et.al \cite{lawrie:studyindentifier06} conduct a  comprehensive study of identifier names  and they find that there is no statistical difference between full words and abbreviations in many cases. Caprile et.al. \cite{caprile:reconstruct00} reconstruct identifier names based on both  standard lexicon and standard syntax, yet it is confined to pre-defined naming standards. 
+
+Butler et.al.  \cite{butler:classname11}  conduct an empirical study of  conventional  Java class naming patterns and patterns of class names related to inheritance by identifying common grammatical structures of Java class identifiers.  Singer et.al. \cite{singer:pattern08} consider semantic information encoded in Java class names  and create  a prototype to inform programmers of particular problems or optimization opportunities in their code based on the naming patterns.
+H{\o}st et.al. \cite{einar:debugname09} exploit  whether or not a method name and implementation are likely to be good matches for each other and provide a simple pattern-based naming recommendation approach to evaluate reasonable names for the identifiers.  Kashiwabara et.al \cite{yuki:verbrecommend14} recommend candidate verbs for method names based on the association rules extracted from similar code fragments and help developers consistently use various verbs in method names. Aligned with the idea of extracting association rules from similar code fragments, we construct recommended variable names based on the related contexts of the systematic edits. Our approach is able to generate multiple reasonable names for different edit locations based on the naming patterns.
+%The functions include standard algorithms studied in computer science courses as well as functions extracted from production code. The results show that full word iden- tifiers lead to the best comprehension; however, in many cases, there is no statistical difference between full words and abbreviations.
+
+%%% parameter and name recommendation
+%GraPacc extracts API usage patterns with relevant context and control/data dependency. Once users query for the code completion, GraPacc extracts context features, rank the best matched pattern and fill in the code. Yet it requires developers manually input API usage pattern to extend its capability.  However, Cookbook assigns equal weight to each nodes that matches transformation template in syntax level without considering the relevance and popularity of different templates. 
+
+
+%\noindent {\textbf{Naming Recommendation}}
+%1. recommend method name+structure context matching+ IR concept location
+%2. recommend verb name
+%3. mining identifier naming
