@@ -1,0 +1,58 @@
+This is BibTeX, Version 0.99d (TeX Live 2010)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: paper.aux
+The style file: abbrv.bst
+Database file #1: sigproc.bib
+Database file #2: transform.bib
+Database file #3: clone.bib
+Database file #4: proactive.bib
+Database file #5: synthesis.bib
+Warning--empty title in eclipse:recommend
+Warning--empty booktitle in eclipse:recommend
+Warning--empty year in eclipse:recommend
+Warning--empty title in sublime
+Warning--empty booktitle in sublime
+Warning--empty year in sublime
+Warning--empty booktitle in john:cookbook
+You've used 49 entries,
+            2118 wiz_defined-function locations,
+            726 strings with 10454 characters,
+and the built_in function-call counts, 21674 in all, are:
+= -- 2063
+> -- 1032
+< -- 38
++ -- 407
+- -- 356
+* -- 1392
+:= -- 3263
+add.period$ -- 143
+call.type$ -- 49
+change.case$ -- 323
+chr.to.int$ -- 0
+cite$ -- 56
+duplicate$ -- 955
+empty$ -- 1699
+format.name$ -- 356
+if$ -- 4872
+int.to.chr$ -- 0
+int.to.str$ -- 49
+missing$ -- 49
+newline$ -- 244
+num.names$ -- 98
+pop$ -- 427
+preamble$ -- 1
+purify$ -- 276
+quote$ -- 0
+skip$ -- 808
+stack$ -- 0
+substring$ -- 1321
+swap$ -- 405
+text.length$ -- 38
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 196
+warning$ -- 7
+while$ -- 177
+width$ -- 51
+write$ -- 523
+(There were 7 warnings)

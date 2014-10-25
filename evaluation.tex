@@ -1,0 +1,145 @@
+\section{Preliminary Result}\label{sec:result}
+
+%
+%
+%\begin{algorithm}
+%\caption{Pseudocode For the Analyzer}
+%\begin{algorithmic} 
+%\STATE Function \{AnalyzeChange\} \{event, candidateScripts, oldDoc \}
+% \STATE { sTreeRoot $\leftarrow$  XMLElement.getElement(script.ID)}
+% \STATE {rangeDiff $\leftarrow$  Range.Differencer.getDiff(oldDoc,event.currentDoc)}
+%\FORALL {script: candidateScripts}
+%
+%
+%\IF {script.type ==TYPE.INSERT }
+%\IF {rangeDiff.leftLength == 0 \AND rangeDiff.rightLength == 1}
+%\STATE mathchLen$\leftarrow$sTreeRoot.getNodeValue("newNode"). matches (rangeDiff. getChangeText()) 
+%\ELSE 
+%\STATE continue
+%\ENDIF
+%
+%\ELSIF {script.type ==TYPE.DELETE }
+%\IF {rangeDiff.leftLength == 1 \AND rangeDiff.rightLength == 0}
+%\STATE mathchLen$\leftarrow$sTreeRoot.getNodeValue("oldNode"). matches (rangeDiff. getChangeText())  
+%\ELSE 
+%\STATE continue
+%\ENDIF
+%
+%\ELSIF {script.type == TYPE.MOVE }
+%\STATE mathchLen$\leftarrow$sTreeRoot.getNodeValue("moveNode"). matches (rangeDiff. getChangeText())  
+%
+%
+%\ELSIF {script.type == TYPE.UPDATE }
+%\IF {rangeDiff.leftLength$\neq$0 \AND rangeDiff.rightLength $\neq$0}
+%\STATE mathchLen$\leftarrow$sTreeRoot.getNodeValue("oldNode"). matches(rangeDiff.getChangeText())+sTreeRoot. getNode("newNode").matches(rangeDiff.getChangeText())  
+%\ELSE 
+%\STATE continue
+%\ENDIF
+%
+% \IF {matchLen $> 0 $ }
+% \STATE script.addWeight(matchLen*5)
+%\ENDIF
+%\ENDIF
+%
+%\ENDFOR
+%\RETURN candidateScripts
+%\STATE EndFunction
+%\end{algorithmic}
+%\end{algorithm}
+%
+%\begin{algorithm}
+%\caption{Pseudocode For the ScriptApplyer}
+%\begin{algorithmic} 
+%\STATE Function {applyScript (script)}
+%
+%\IF {script.type ==TYPE.INSERT }
+%\STATE   parentNode $\leftarrow$  script.getNode("parentNode")
+%\STATE newNodesRoot $\leftarrow$ script.getNode("newNode")
+%\STATE parentNode.insert(newNodesRoot);
+%
+%
+%\ELSIF {script.type ==TYPE.DELETE }
+%\STATE   rootNode $\leftarrow$  script.getNode("oldNode")
+%\STATE   rootNode.removeFromParent()
+%
+%\ELSIF {script.type ==TYPE.MOVE }
+%
+% \STATE   rootNode $\leftarrow$  script.getNode("moveNode")
+% \STATE  parentNode $\leftarrow$  script.getNode("newParent")
+% \STATE parentNode.insert(rootNode)
+%
+%\ELSIF {script.type ==TYPE.UPDATE }
+% \STATE   rootNode $\leftarrow$  script.getNode("oldNode")
+% \STATE  newRootNode $\leftarrow$  script.getNode("newNode")
+% \STATE  parentNode $\leftarrow$  script.getNode("parentNode")
+%\STATE  rootNode.removeFromParent()
+%\STATE parentNode.insert(newRootNode)
+%\ENDIF
+%\RETURN parentNode.toString()
+%\STATE EndFunction
+%\end{algorithmic}
+%\end{algorithm}
+%
+%
+%
+%
+%
+%\begin{algorithm}
+%\caption{Pseudocode For the ViewActionListener}
+%\begin{algorithmic} 
+%\STATE  {Function documentPreChange}
+%\STATE {line $\leftarrow$  changedDocument.getChangedLine(event)}
+%\IF{line $\neq$  lastChangedLine}
+%\STATE {lastChangedLine $\leftarrow$ line}
+%\ENDIF
+%\STATE EndFunction
+%
+%\STATE {Function documentChange (event)}
+%\STATE candidateScripts $\leftarrow$  Matcher.getCandidateScripts(event)
+%\STATE   candidateScripts  $\leftarrow$   Analyzer.analyzeChange(event, candidateScripts, oldDoc)
+%\STATE view.setInput(candidateScripts)
+%\STATE EndFunction
+%
+%\STATE Function applyScript(script)
+%\STATE  ScriptApplyer.applyScript(script)
+%
+%\STATE EndFunction
+%
+%
+%\end{algorithmic}
+%\end{algorithm}
+
+
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.5\textwidth]{fig/contentassist.png}
+\caption{Content Assist Example}
+\label{fig:assist}
+\end{figure}
+
+We build a UI prototype for the Eclipse Content Assist Plugin. Figure~\ref{fig:assist} shows a snapshot of the SyditRecommender that recommends the potential edits proposals based on the editing context which has the features listed below:
+ \begin{itemize}
+ \item It ranks the candidate proposals with respect to its matching of the editing context and returns the sorted candidate recipe list.
+ \item It caches the consequence of the transformation and warns users by displaying all compilation errors after applying the proposal on a hidden copy of the file under editing.
+ \item It updates potential transformation proposals according to the editing stream and updates the consequence evaluation simultaneously.
+ \end{itemize}
+
+As shown in Figure~\ref{fig:assist}, SyditRecommender analyzes the editing context against all editing scripts in the library, computing the matching weight by looking forward and backward for both abstract identifiers as well concrete ones. It then ranks the candidate scripts with both matching weight and occurrence weight and invokes content assist engine in Eclipse to display the result in the pop-up menu shown in the graph. Simultaneously, SyditRecommender checks the consequence of each top ranked transformation rules and returns the compilation result for each recipe, so that whenever programer selects one of the proposals, our tool is able to show the preview of the transformation as well as the consequence evaluation aside in yellow comment area correspondingly. After checking the preview and consequence evaluation, developers selects to apply the preferred proposal with a click on the menu option.
+
+\section{Evaluation}\label{sec:evaluate}
+\subsection{Experiment on Eclipse SWT}
+
+We first evaluate the precision and recall changes in terms of different matching threshold.  
+
+We evaluate the accuracy and response time of SyditRecommender with 68 exemplar systematic edits from the version history of Eclipse SWT  aligned with the data set used in \cite{meng:lase}. We generate 28 edit recipes in the scripts library. The results are shown in Table X. We found that SyditRecommender correctly transforms X out of Y systematic edits correctly with a response time of X miniseconds on average. 
+
+For the consequence evaluation, our approach correctly covers X compilation errors warning out of Z on average and Y control dependency and data dependency conflicts out of Z. 
+
+
+\subsection{User Study}
+To assess the usability, intuitiveness and efficiency of the SyditRecommender, we conduct a user study in X participants with Y years development experience in Object-oriented language such as Java and C\#. We created Z transformation tasks for the study and separate the participants in terms of its experience so that both groups have the same number of people with a similar working experience. One group is asked to use SyditRecommender while the other one preforms the systematic edits without any tool support. X\% of participants who use SyditRecommender agree that it is useful and can significantly improve the working efficiency with less human error in program transformation. We compared the time participants spent in two groups and found that the group with SyditRecommender is X seconds faster than the other one, with a X\% of improvement in efficiency. And the programs generated by SyditRecommender is Q\% similar to the corresponding human editing. 
+
+
+

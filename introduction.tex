@@ -1,0 +1,102 @@
+\section{Introduction}
+
+Recent studies show that developers repeat their own mistakes or unknowingly repeat the errors from other in similar but not identical contexts and they are leaning to reuse existed code fragments with adaptive changes for similar programming tasks to save development effort \cite{nguyen:evolve}.   Tools such as linked editing \cite{graham:linkedit04}, CloneTracker \cite{ekwa:clonetracker07} and Cleman \cite{nguyen:cleman08} are able to modify multiple code fragments as one yet they are confined to identical changes on clone regions only.   Other  API migration tools  \cite{nguyen:api, andersen:semantic, nguyen:graph}  focus on high-level stylized API transformation with adaptation patterns from codebase. 
+
+%extract context features, rank the best matched pattern from the database and fill in the code automatically. 
+
+Sydit \cite{meng:sydit} and LASE \cite{meng:lase} match codebase with the given systematic edit template,  abstract context-aware transformation from examples,  identify similar edit locations,  and apply adaptive changes to similar code segments.  However,   these tools are confined to matching the codebase against a single recipe and perform similar edits to all matching code locations. %cannot match a specific edit location with multiple edit recipes and identify the most suitable edit recipe.
+
+ Cookbook \cite{john:cookbook}     actively matches the incoming edit stream with multiple edit recipes to recommend the most suitable transformation rule on the fly.  Yet  Cookbook cannot guarantee a safe transformation without introducing compilation errors because it evaluates the control and data dependence only when it generates the edit recipe but does not check whether the transformation will invoke new compilation errors to the target after transformation.  
+ 
+ We proactively apply the transformation to the target code and invoke Eclipse compilation error checker to evaluate the consequence of the transformation before undoing the change and rolling back to the original version. Motivated by the speculative consequence evaluation \cite{muslu:offline}, we  inform developers of  the preview of the target context after transformation and the compilation errors caused by the transformation before the change is actually applied to the edit location. 
+If the change will invoke any compilation errors, our tool asks for developer's confirm before applying the transformation. Developer can also select one or more edit locations in the recommendation list and review the preview of the transformation with corresponding compilation errors caused by the transformation. After reviewing the systematic edits in the target locations, the developer is able to apply the systematic edit to one or multiple locations, to all the places that will not invoke compilation errors, or to all places without considering compilation errors. 
+
+
+Similar to Cookbook, our tool matches the suitable edit recipe by tracking living edit stream. Yet in Clipboard, when the developer invokes code completion engine in Eclipse and selects an edit recipe from the pop-up menu, our tool provides the  preview of the change with potential compilation errors at the area of additional information next to the pop-up recommendation menu.
+
+
+To further simplify  the process of generating, selecting and invoking the program transformation rule,   Clipboard provides an intuitive drag-and-drop approach to demonstrate the snapshots of the example code region before and after the transformation, and applies the transformation by double click or dragging the item of the example (or edit recipe) to the target context. Once the developer drags the code region to the Clipboard, our tool matches similar context based on the similarity of the syntactic structure and recommend the locations that might require similar systematic edit. After the developer specifies the change by dragging the  changed code region and dropping it to the new version of the edit recipe in the Clipboard, our tool generates the transformation result of the top ranked edit location and displays the preview of the systematic edit to the developers. Developers can select one or more candidate edit locations and apply the systematic edits to multiple edit locations.   
+
+%Our approach exceeds these systematic program transformation tools in the following three aspects. First, these tools match the codebase against a single recipe to perform similar edits to all matching code locations, while Clipboard is able to actively match the incoming edit stream with multiple edit templates to recommend the most suitable transformation rule. Second, our tool provides transformation preview to the developers, proactively checks the compilation error caused by the transformation, and warns developers before the transformation is performed. Finally, as Sydit and LASE abstract the identifiers in the edit scripts, they fail to give a meaningful name to the parameters in the target code region.  ClipBoard overcomes the naming problem with a transformation mapping dictionary generated from syntactic difference \cite{fluri:distiller07} between the given example(s) and the target region, and recommend reasonable names to the corresponding variables.
+
+To leverage the comprehension of systematic edits, we record the values of the matched variables and methods between the example and the target location, extract association rules, and synthesize the recommended names for the variables in the target location. For instance, given a new inserted statement 
+\codefont{IActionBar actionBar = fContainer.getActionBars()}
+in the example, our approach extracts the differences from the match pair of variable types \codefont{(IActionBar, IServiceLocator)} and the match pair of method calls \codefont{(fContainer.getActionBars(), fContainer.getServiceLocator())}, and automatically recommends the  name of the new variable \codefont{\$v} as \codefont{serviceLocator} in the statement \codefont{IServiceLocator \$v = fContainer.getServiceLocator()}.   
+
+%association rules from matched types and variable and identify
+%, simplify the selection and invocation of program transformation rules, and inform developers of the potential compilation errors from the transformation, we construct an Eclipse Plugin to support systematic edits and recommend the most suitable edit recipes based on the context of the incoming edit streams. 
+
+
+
+%developers defines particular edit recipes by demonstrating the snapshot before the change and the one after applying the transformation  
+
+
+
+%before applying the edits to the program. With these proposals, our tool monitors the incoming edit stream against the contexts of existing recipes in syntax level. Meanwhile, our tool detects the occurrence of the similar systematic edits for each recipe stored in an edit script library and ranks the suitable recipes considering both the similarity and occurrence of the templates. Common edit operations in ranked recipes are used to further filter out irrelevant transformation rules. Then the top ranked scripts are displayed as content assist proposals in Eclipse Engine.  Once developers select a recipe from the pop-up menu of transformation recommendation, the tool automatically displays the change preview of the program. To help evaluate the consequence of program transformation, our tool keeps a separate copy for the file under editing at the background and checks the compilation errors with context dependency for this program transformation without disturbing the current workspace. This file mirror is continuously synchronized with the editing file after each editing keystroke once the content assist is invoked in Eclipse IDE. Developer simply clicks the edit script option in the pop-up menu and apply the transformation on the target program after checking the preview and the transformation consequence.
+%SyditRecommender then applies the transformation rule on the copy file and analyzes the consequence of the code change before displaying the consequence along with the change preview.  
+
+
+
+%We evaluate our tool with 68 exemplar changed method drawn from the version history of Eclipse SWT from prior work \cite{meng:lase, john:cookbook} .  
+
+To evaluate the usability, intuitiveness and effectiveness for this code recommendation system, we conducted an initial user study with 68 exemplar changed method drawn from the version history of Eclipse SWT from prior work \cite{meng:lase, john:cookbook} .  On average, our tool spent Z seconds to generate edit script and perform the transformation to the edit location which does not invoke compilation error, compared to W seconds in manual edit effort without the tool support. Our consequence evaluation correctly addressed X out of Y systematic edits with an accuracy of X\%. Compared to the edit version history in the code repository, our approach correctly recommends X out of Y names of the new identifiers. Our result shows that Clipboard is able to speed up the program transformation and minimize the omission errors in program transformation. 
+
+%The edits generated from the selected recipe are Z\% similar to the developers' manual changes. 
+%We also found that our consequence evaluation has a precision of X\% and recall of Y\%.  
+% after  locate all relevant edit locations, X milliseconds to find the suitable recipes on the fly,  and Y milliseconds to generate the  transformation code based on the template and target location, By comparing the automatic transformation result with the manual edits in the version history, 
+%To evaluate whether recommendations of relevant edit locations are of any help to developers working on a change task, and if  there are recommendations developers find useful but that Clipboard does not suggest
+ %on X developers from University of Texas at Austin with X years development experience on average in Object-oriented languages such as Java and C\#. 
+% By separating them into experimental group who adopted Clipboard and control group without any tool support. We found that Clipboard is able to improve developers efficiency of Z\% on average with a better confidence to apply the transformation automatically. Z\% of them agreed that Clipboardwas helpful and could improve the working efficiency and eliminate human errors in systematic editing.  By comparing the result of two groups, we found that SyditRecommender is able to generate systematic edits X\% similar to the manual editing.
+
+In summary, our paper makes the following contributions. 
+\begin{itemize}
+  \item  To simplify the  definition, invocation, and configuration process of example-based systematic edits, we allow developers to manipulate the region of systematic edits intuitively via drag-and-drop. % eliminate the need for menu or dialogs, and allow developers to directly manipulate  . 
+Given a list of edit recipes, we match the most suitable systematic edit on the fly and invoke the transformation based on the incoming edit stream. 
+
+
+ % By ranking the context in syntax level and considering the occurrence of the similar systematic edits, we build an intuitive content assist Eclipse Plugin to recommend the most suitable systematic recipes using edit scripts learned from examples. SyditRecommender simplifies the obscure configuration and invocation process of the code completion. 
+  \item  We conduct a speculative analysis of the potential compilation errors caused by the transformation and inform the developer of the potential errors along with the preview of the target code region after the systematic edit.  Our approach proactively applies the transformation to the target location, evaluates the compilation error invoked by the change, and rollbacks to the original version. 
+  
+  \item To increase the comprehension of the auto-generated transformation code, we leverage systematic naming patterns in program differences and synthesize names of the corresponding identifiers in the target edit location.
+ % We propose a speculative consequence evaluation on the potential recipe adaptation by applying the edits on a hidden copy of the active file, compiling it at the background and providing potential compilation errors and dependency conflicts to the front end. 
+%  \item We provide a preview of the program transformation after applying the selected edit recipe to increase user's confidence on applying the systematic edits. 
+%  \item In our user study, X\% participants agreed that SyditRecommender were helpful to the systematic edits and were able to improve programming efficiency in an intuitive way. Our experiment on a medium size project shows that our technique achieves an accuracy of A\% and B\% faster than manual edits adaptation with Z\% similarity to the manual changes.
+\end{itemize}
+
+The rest of the paper is organized as follows. Section~\ref{sec:related} places our tool in the context of related works in code recommendation and systematic edit transformation. Section~\ref{sec:motivation} overviews our approach with an motivation example. Section~\ref{sec:approach} describes the concrete steps for our tools with matching, filtering and consequence evaluation algorithms. Section~\ref{sec:result} presents the preliminary result for the UI prototype of the content assist Eclipse Plugin, followed by the preliminary evaluation in Section~\ref{sec:evaluate}. The next two sections discusses the threats to the validity, discussion and future work for our program transformation recommendation technique. And the paper concludes in Section~\ref{sec:conclusion}.
+
+%Despite these code limited with pre-defined semantic preserving edits,  
+
+
+%Other program transformation approaches \cite{bruch:rank, robbes:history} provide a better suggestion for the candidate list by means of relevance or version history. 
+
+
+%%%move to introduction
+
+
+
+%Recent work observes that a large amount of code changes are systematic, similar but not identical.   
+
+%Program transformation tools always require tedious parameter prescription with a predefined template in advance. 
+
+%Code completion helps improve developers' program productivity. When developers type in part of the code, the code completion engine is able to automatically fill the rest of code by matching editor's input stream with pre-defined templates. For example, the \textit{Completion Engine} in Eclipse provides \textit{call completion} for likely method calls whenever developers trigger code completion on an object  and \textit{quick fixer} for actions that can be undertaken to repair the error.  We  supports custom, reusable templates of complex edit operations. By specifying change examples, Cookbook first generates an abstract edit recipe to describe the most specific generation of the demonstrated example program transformations, before storing the recipe into the library. Then it matches a developer's edit stream and recommend a suitable program transformation script that is capable of filling out the rest of change customized to the target. However, it requires a custom edit recipe library to match developers' edit stream. If developers want to generate a new recipe, they have to train Cookbook with two or more examples before applying the recipe to the third or more edits. In this project, we propose to use version history in forked projects to train the change examples and apply similar changes from peer projects to the target one. We also plan to improve the user interface of the Cookbook and make it more user?friendly.
+
+%Current program transformation tools are 
+
+
+
+%, \textit{subwords completion} which matches part of the text instead of the exact prefixes 
+
+
+% However, the current support for code completion is limited to pre-defined code templates or single method call of the variable to complete the rest of changes. There exists a code completion technique call Cookbook that supports custom, reusable templates of complex edit operations. By specifying change examples, Cookbook first generates an abstract edit recipe to describe the most specific generation of the demonstrated example program transformations, before storing the recipe into the library. Then it matches a developer's edit stream and recommend a suitable program transformation script that is capable of filling out the rest of change customized to the target. However, it requires a custom edit recipe library to match developers' edit stream. If developers want to generate a new recipe, they have to train Cookbook with two or more examples before applying the recipe to the third or more edits. In this project, we propose to use version history in forked projects to train the change examples and apply similar changes from peer projects to the target one. We also plan to improve the user interface of the Cookbook and make it more user?friendly.
+
+
+
+%Integrated Development Environments help simplify common development tasks and thus improve the correctness and efficiency of software development. For instance, Eclipse facilitates auto-complete mechanism to recommend functions based on user's input stream, while Quick Fix provides possible recommendations to resolve compilation errors. Based on pre-defined templates, Omar et al. proposed an architecture to integrate highly-specialized code generation tools into developers' workflow while BeneFactor \cite{ge:benfactor} and WitchDoctor \cite{foster:witchdoctor} detect users' manual refactoring behavior on the fly and remind or complete the refactoring automatically with pre-defined code templates.  %Quick Fix Scout \cite{muslu:scout} evaluates the consequence of the  Quick Fix recommendations from Eclipse Engine.
+%DNDRefactoring \cite{lee:dndrefactor} streamlines the invocation and configuration precess for refactoring by drag-and-drop program elements.  
+%All of these code completion tools require pre-defined edit recipes to perform the transformations.  Nguyen et al. \cite{nguyen:graph} facilitate context-sensitive features to search and rank API usage patterns that are most fitted with the code under editing, yet developers need to provide textual template code fragments as usage pattern to extend code. 
+%Sydit \cite{meng:sydit} and LASE \cite{meng:lase} match codebase and abstract context-aware transformation from examples and apply custom changes to similar code segments, yet it is not easy to select the most suitable edit recipe and developers are reluctant to use it without understanding the rationale and fully dependency of the code transformation. 
+
+%there is a lack of consequence evaluation for the 
+
+%developers have to specify textual examples with dialog and manually select the edits from recipe library. 

@@ -1,0 +1,262 @@
+\begin{thebibliography}{10}
+
+\bibitem{andersen:generic}
+J.~Andersen and J.~L.Lawall.
+\newblock Generic patch inference.
+\newblock {\em ASE 2008}, pages 337--346, 2008.
+
+\bibitem{andersen:semantic}
+J.~Andersen, A.~C. Nguyen, D.~Lo, J.~L. Lawall, and S.-C. Khoo.
+\newblock Semantic patch inference.
+\newblock {\em ASE 2012}, pages 382--385, 2012.
+
+\bibitem{butler:classname11}
+S.~Butler, M.~Wermelinger, Y.~Yu, and H.~Sharp.
+\newblock Mining java class naming conventions.
+\newblock In {\em ICSM}, pages 93--102, 2011.
+
+\bibitem{caprile:reconstruct00}
+B.~Caprile and P.~Tonella.
+\newblock Restructuring program identifier names.
+\newblock In {\em ICSM}, pages 97--107, 2000.
+
+\bibitem{cordy:scatter}
+J.~R. Cordy.
+\newblock Exploring large-scale system similarity using incremental clone
+  detection and live scatterplots.
+\newblock {\em ICPC 2011}, pages 151--160, 2011.
+
+\bibitem{dagenais:semdiff}
+B.~Dagenais and M.~P. Robillard.
+\newblock Recommending adaptive changes for framework evolution.
+\newblock In {\em ICSE}, pages 481--490, 2008.
+
+\bibitem{wit:cloneboard09}
+M.~de~Wit, A.~Zaidman, and A.~van Deursen.
+\newblock Managing code clones using dynamic change tracking and resolution.
+\newblock In {\em ICSM}, pages 169--178, 2009.
+
+\bibitem{ekwa:clonetracker07}
+E.~Duala-Ekoko and M.~P. Robillard.
+\newblock Tracking code clones in evolving software.
+\newblock In {\em ICSE}, pages 158--167, 2007.
+
+\bibitem{fluri:distiller07}
+B.~Fluri, M.~W{\"u}rsch, M.~Pinzger, and H.~Gall.
+\newblock Change distilling: Tree differencing for fine-grained source code
+  change extraction.
+\newblock {\em IEEE Trans. Software Eng.}, 33(11):725--743, 2007.
+
+\bibitem{gabel:inconsistence10}
+M.~Gabel, J.~Yang, Y.~Yu, M.~Goldszmidt, and Z.~Su.
+\newblock Scalable and systematic detection of buggy inconsistencies in source
+  code.
+\newblock In {\em OOPSLA}, pages 175--190, 2010.
+
+\bibitem{gabel:dejavu10}
+M.~Gabel, J.~Yang, Y.~Yu, M.~Goldszmidt, and Z.~Su.
+\newblock Scalable and systematic detection of buggy inconsistencies in source
+  code.
+\newblock In {\em OOPSLA}, pages 175--190, 2010.
+
+\bibitem{bodik:codehit14}
+J.~Galenson, P.~Reames, R.~Bod\'{\i}k, B.~Hartmann, and K.~Sen.
+\newblock Codehint: Dynamic and interactive synthesis of code snippets.
+\newblock In {\em ICSE}, 2014.
+
+\bibitem{ge:benfactor}
+X.~Ge, Q.~L.DuBose, and E.~Murphy-Hill.
+\newblock Reconciling manual and automatic refactoring.
+\newblock {\em ICSE 2012}, pages 211--221, 2012.
+
+\bibitem{claire:genprog12}
+C.~L. Goues, T.~Nguyen, S.~Forrest, and W.~Weimer.
+\newblock Genprog: A generic method for automatic software repair.
+\newblock {\em IEEE Trans. Software Eng.}, 38(1):54--72, 2012.
+
+\bibitem{einar:debugname09}
+E.~W. H{\o}st and B.~M. {\O}stvold.
+\newblock Debugging method names.
+\newblock In {\em ECOOP}, pages 294--317, 2009.
+
+\bibitem{eclipse:recommend}
+http://www.eclipse.org/recommenders/manual/.
+
+\bibitem{sublime}
+http://www.sublimetext.com/.
+
+\bibitem{john:cookbook}
+J.~Jacobellis, N.~Meng, and M.~Kim.
+\newblock Cookbook: In situ code completion using edit recipes learned from
+  examples.
+\newblock 2014.
+
+\bibitem{su:clonebug07}
+L.~Jiang, Z.~Su, and E.~Chiu.
+\newblock Context-based detection of clone-related bugs.
+\newblock In {\em ESEC/SIGSOFT FSE}, pages 55--64, 2007.
+
+\bibitem{orso:minthint13}
+S.~Kaleeswaran, V.~Tulsian, A.~Kanade, and A.~Orso.
+\newblock Minthint: Automated synthesis of repair hints.
+\newblock {\em CoRR}, abs/1306.1286, 2013.
+
+\bibitem{yuki:verbrecommend14}
+Y.~Kashiwabara, Y.~Onizuka, T.~Ishio, Y.~Hayase, T.~Yamamoto, and K.~Inoue.
+\newblock Recommending verbs for rename method using association rule mining.
+\newblock In {\em CSMR-WCRE}, pages 323--327, 2014.
+
+\bibitem{lawrie:studyindentifier06}
+D.~Lawrie, C.~Morrell, H.~Feild, and D.~Binkley.
+\newblock What's in a name? a study of identifiers.
+\newblock In {\em ICPC}, pages 3--12, 2006.
+
+\bibitem{lee:dndrefactor}
+Y.~Y. Lee, N.~Chen, and R.~E.Johnson.
+\newblock Drag-and-drop refactoring: Intuitive and efficient program
+  transformation.
+\newblock {\em ICSE 2013}, pages 23--32, 2013.
+
+\bibitem{li:cpminer06}
+Z.~Li, S.~Lu, S.~Myagmar, and Y.~Zhou.
+\newblock Cp-miner: Finding copy-paste and related bugs in large-scale software
+  code.
+\newblock {\em IEEE Trans. Software Eng.}, 32(3):176--192, 2006.
+
+\bibitem{lieberman:pbd}
+H.~Liberman.
+\newblock Your wish is my command: Programming by example.
+\newblock In {\em Morgan Kaufmann Publisher}, 2001.
+
+\bibitem{bodik:jungloid05}
+D.~Mandelin, L.~Xu, R.~Bod\'{\i}k, and D.~Kimelman.
+\newblock Jungloid mining: helping to navigate the api jungle.
+\newblock In {\em PLDI}, pages 48--61, 2005.
+
+\bibitem{meng:sydit}
+N.~Meng, M.~Kim, and K.~S.McKinley.
+\newblock Systematic editing: Generating program transformations from an
+  example.
+\newblock {\em PLDI 2011}, pages 329--342, 2011.
+
+\bibitem{meng:lase}
+N.~Meng, M.~Kim, and K.~S.McKinley.
+\newblock Lase: Locating and applying systematic edits by learning from
+  examples.
+\newblock {\em ICSE 2013}, pages 502--511, 2013.
+
+\bibitem{miller:simultaneousedit01}
+R.~C. Miller and B.~A. Myers.
+\newblock Interactive simultaneous editing of multiple text regions.
+\newblock In {\em USENIX Annual Technical Conference, General Track}, pages
+  161--174, 2001.
+
+\bibitem{miller:lapis02}
+R.~C. Miller and B.~A. Myers.
+\newblock Lapis: smart editing with text structure.
+\newblock In {\em CHI Extended Abstracts}, pages 496--497, 2002.
+
+\bibitem{miller:multiselect02}
+R.~C. Miller and B.~A. Myers.
+\newblock Multiple selections in smart text editing.
+\newblock In {\em IUI}, pages 103--110, 2002.
+
+\bibitem{muslu:implicate}
+K.~Muslu, Y.~Brun, R.~Holmes, M.~D. Ernst, and D.~Notkin.
+\newblock Improving ide recommendations by considering global implications of
+  existing recommendations.
+\newblock {\em ICSE 2012}, pages 1349--1352, 2012.
+
+\bibitem{muslu:scout}
+K.~Muslu, Y.~Brun, R.~Holmes, M.~D. Ernst, and D.~Notkin.
+\newblock Speculative analysis of integrated development environment
+  recommendations.
+\newblock {\em OOPSLA 2012}, pages 669--682, 2012.
+
+\bibitem{muslu:offline}
+K.~Muslu, Y.~Brun, R.~Holmes, M.~D. Ernst, and D.~Notkin.
+\newblock Making offline analyses continuous.
+\newblock {\em FSE 2013}, pages 323--333, 2013.
+
+\bibitem{johnson:minepattern14}
+S.~Negara, M.~Codoban, D.~Dig, and R.~E. Johnson.
+\newblock Mining fine-grained code changes to detect unknown change patterns.
+\newblock In {\em ICSE}, 2014.
+
+\bibitem{nguyen:graph}
+A.~T. Nguyen, T.~T. Nguyen, H.~A. Nguyen, A.~Tamrawi, H.~V. Nguyen,
+  J.~Al-Kofahi, and T.~N.Nguyen.
+\newblock Graph-based pattern-oriented, context-sensitive source code
+  completion.
+\newblock {\em ICSE 2012}, pages 69--79, 2012.
+
+\bibitem{nguyen:evolve}
+H.~A. Nguyen, A.~T. Nguyen, T.~T. Nguyen, T.~N. Nguyen, and H.~Rajan.
+\newblock A study of repetitiveness of code changes in software evolution.
+\newblock {\em ASE 2013}, 2013.
+
+\bibitem{nguyen:api}
+H.~A. Nguyen, T.~T. Nguyen, G.~Wilson, Jr., A.~T. Nguyen, M.~Kim, and T.~N.
+  Nguyen.
+\newblock A graph-based approach to api usage adaptation.
+\newblock {\em OOPSLA 2010}, pages 302--321, 2010.
+
+\bibitem{nguyen:semfix13}
+H.~D.~T. Nguyen, D.~Qi, A.~Roychoudhury, and S.~Chandra.
+\newblock Semfix: program repair via semantic analysis.
+\newblock In {\em ICSE}, pages 772--781, 2013.
+
+\bibitem{nguyen:cleman08}
+T.~T. Nguyen, H.~A. Nguyen, N.~H. Pham, J.~M. Al-Kofahi, and T.~N. Nguyen.
+\newblock Cleman: Comprehensive clone group evolution management.
+\newblock In {\em ASE}, pages 451--454, 2008.
+
+\bibitem{baishakhi:spa13}
+B.~Ray, M.~Kim, S.~Person, and N.~Rungta.
+\newblock Detecting and characterizing semantic inconsistencies in ported code.
+\newblock In {\em ASE}, pages 367--377, 2013.
+
+\bibitem{ren:chianti05}
+X.~Ren, B.~G. Ryder, M.~St{\"o}rzer, and F.~Tip.
+\newblock Chianti: a change impact analysis tool for java programs.
+\newblock In {\em ICSE}, pages 664--665, 2005.
+
+\bibitem{foster:witchdoctor}
+S.~R.Foster, W.~G.Griswold, and S.~Lerner.
+\newblock Witchdoctor: Ide support for real-time auto-completion of
+  refactorings.
+\newblock {\em ICSE 2012}, pages 222--232, 2012.
+
+\bibitem{niko:hotclone12}
+N.~Schwarz.
+\newblock Hot clones: Combining search-driven development, clone management,
+  and code provenance.
+\newblock In {\em ICSE}, pages 1628--1629, 2012.
+
+\bibitem{singer:pattern08}
+J.~Singer and C.~C. Kirkham.
+\newblock Exploiting the correspondence between micro patterns and class names.
+\newblock In {\em SCAM}, pages 67--76, 2008.
+
+\bibitem{graham:linkedit04}
+M.~Toomim, A.~Begel, and S.~L. Graham.
+\newblock Managing duplicated code with linked editing.
+\newblock In {\em VL/HCC}, pages 173--180, 2004.
+
+\bibitem{wang:cloneevaluate12}
+X.~Wang, Y.~Dang, L.~Zhang, D.~Zhang, E.~Lan, and H.~Mei.
+\newblock Can i clone this piece of code here?
+\newblock In {\em ASE}, pages 170--179, 2012.
+
+\bibitem{zhang:parameterrecommend12}
+C.~Zhang, J.~Yang, Y.~Zhang, J.~Fan, X.~Zhang, J.~Zhao, and P.~Ou.
+\newblock Automatic parameter recommendation for practical api usage.
+\newblock In {\em ICSE}, pages 826--836, 2012.
+
+\bibitem{zhang:ccevent13}
+G.~Zhang, X.~Peng, Z.~Xing, S.~Jiang, H.~Wang, and W.~Zhao.
+\newblock Towards contextual and on-demand code clone management by continuous
+  monitoring.
+\newblock In {\em ASE}, pages 497--507, 2013.
+
+\end{thebibliography}

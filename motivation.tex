@@ -1,0 +1,14 @@
+\section{Motivating Example}\label{sec:motivation}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.5\textwidth]{fig/codeexample.png}
+\caption{Motivation Example from org.eclipse.compare.CompareEditorInput between v20061120 and v20061218. 
+%The code snippets shown in red background show similar changes made to two different methods getActionBars() and getServiceLocator(). 
+}
+\label{fig:motivateExample}
+\end{figure}
+
+This section overviews the workflow of our tool based on a systematic edit  from  \codefont{org.eclipse.compare.CompareEditor} \codefont{Input} between  \codefont{v20061120 and v20061218}.  Figure~\ref{fig:motivateExample} displays part of the diff patch of this change, the code in black remains unchanged while the added code is illustrated in blue with  \codefont{"+"} ahead of line and the deleted statements is in red with  \codefont{"-"}. The function  \codefont{getActionBars()} and  \codefont{getServiceLocator()} in the class  \codefont{CompareEditorInput} utilize very similar but not identical context with a similar edit as well: removing a condition statement, adding an initialization sentence and add another condition statement afterward. The only difference of this change is the type of the variables. Given this similar yet not identical changes, SyditRecommender first generates an abstract edit transformation recipe for further use. %The backend recommendation detector will start to locate all similar edits in package level and count the occurrence of the systematic edits. 
+
+Later, when developers type in some edits in a similar context, our tool invokes context assist engine in Eclipse and displays the recommendation options for all suitable transformation rules sorted in relevance and popularity order. When developers go through the options in the pop-up menu, our tool provides transformation preview on the target program as well as the consequence of this code change, that is, which errors will be invoked once applying this change. After checking the change preview and corresponding consequence evaluation, developers simply click the recommendation options and perform the edits on the target program.  
+

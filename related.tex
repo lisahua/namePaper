@@ -1,0 +1,113 @@
+\section {Related Work}\label{sec:related}
+%\noindent {\textbf{Example-based Systematic Editing} } 
+%J.Andersen et al. \cite{andersen:generic, andersen:semantic}
+
+
+
+%\textbf{Code Clone Detection}
+%Prior research shows that developers often port similar features and bug fixes within and across projects~\cite{Nguyen:evolve, cordy:scatter, baishakhi:port}. 
+
+
+
+
+
+
+
+\noindent{\textbf{Example-based Editing}}
+%1. program transformation 
+ClipBoard finds its roots in {\it programming by demonstration} (PBD), which is also called programming by examples \cite{lieberman:pbd}. In PBD, the user demonstrated one or more examples of a program, and the system generalizes the demonstration into a program that can be applied to other examples. Simultaneous editing \cite{miller:simultaneousedit01}  performs a group of repetitive text editing simultaneously with selection guessing \cite{miller:multiselect02}  and text constraints \cite{miller:lapis02}. Although the PBD text editors, such as Sublime \cite{sublime}, are able to provide multiple selection and batch editing functions to help developers, they can only  make the same textual changes to multiple locations simultaneously. Clipboard exploits program AST structure and performs similar but not identical systematic editing to multiple places. 
+
+
+LIBSYNC \cite{nguyen:api} and spdiff \cite{andersen:generic, andersen:semantic}   detects the difference in API usage from multiple instance and migrate the programs by learning API usage adaptation patterns. Yet these API migration tools are confined to stylized API usage and fail to consider dependence constraints of the surrounding context. Our approach supports expressive and customizable transformation to multiple edit locations with customized context-awareness systematic edits to each location. 
+
+Semdiff \cite{dagenais:semdiff} automatically recommends adaptive changes in the face of  high-level method additions and deletions, while our approach focuses on more fine-grained systematic transformation and recommend similar edits based on the syntactic structure similarity. Negara et.al \cite{johnson:minepattern14} mine fine-grained frequent code change patterns with the AST nodes but are unable to transform the similar change to multiple edit locations. PRECISE \cite{zhang:parameterrecommend12}  extracts usage pattern from existing API usage and adaptively recommend parameters based on the current context. 
+
+Sydit  \cite{meng:sydit}  generates edit scripts from a single systematic edit example and requires developers to specify the target locations before applying the transformation. Whereas LASE  \cite{meng:lase}  overcomes the insufficient transformation rule generation from a single example and identifies the target transformation locations automatically. Different from these tools, Clipboard is able to actively match the incoming edit stream with multiple edit templates to recommend the most suitable transformation rule with compilation error checking. 
+
+
+
+                
+%since SYDIT and LASE extract edit scripts based on the edit operations (eg. insert and delete), they fail to handle incontinuous  context across functions. Our tool %Yet neither of these approaches provide consequence evaluation on the fly before adapting the transformation rules.
+
+
+%2. Example based programming
+%3. API migration
+%4. Twinning
+%5. Syndit, LASE
+
+%\noindent{\textbf{ Edit location suggestion }}
+
+
+%1. Suggest edit location
+%2. Simultaneous Edit+ +LAPIS+multiple selection 
+
+
+%5. Sublime
+
+
+\noindent{\textbf{Code  clone management }}
+%1. Clone Region Descriptor
+%2.CCEvents
+%2. Hot Clone
+%3. CloneBoard
+%linked editing
+Recent research results pointed out that software system inevitably contain a large amount of similar code due to the copy-and-paste programming practice  \cite{cordy:scatter, su:clonebug07}. These similar or identical code fragments, called {\it code clones}, may impact software quality with inconsistent modifications made to the cloned code snippets \cite{gabel:inconsistence10}. CP-Miner \cite{li:cpminer06} uses data mining techniques to  detects copy-paste related bugs, Dejavu \cite{gabel:dejavu10} identifies syntactic inconsistency bugs based on the assumption that duplicated code fragments generally intend to remain identical, while  SPA \cite{baishakhi:spa13} facilitates state-control and data-dependence analysis to detect semantic inconsistency in ported code. Different from these clone-related bugs detection tools, ClipBoard focuses on performing semantic consistency transformation with compilation error checking rather than identifying inconsistency changes after the edits are applied to the codebase. 
+
+Some clone management tools, such as linked editing \cite{graham:linkedit04}, Cleman \cite{nguyen:cleman08} and HotClones \cite{niko:hotclone12}  detect code clones, allow developers to modify multiple code clones as one, and track changes in separate clone groups. Yet none of these tools are able to apply context-awareness edit transformation.  Other clone management tools support live clone change tracking. CCEvents \cite{zhang:ccevent13} continuously monitors code repositories and provides timely notifications to the stakeholders based on contextual clone events.  CloneBoard \cite{wit:cloneboard09}  monitors copy-and paste activities in the Eclipse and offers resolution strategies for inconsistently modified clones, yet it is confined to the clipboard activity in the Eclipse IDE and cannot perform semantic consistence transformations within clone group. CloneTracker \cite{ekwa:clonetracker07} applies clone region descriptors to modify multiple sections of code consistently. Yet it fails to perform similar but not identical systematic edits based on the context dependency analysis. Different from these tools for clone-based change management, ClipBoard focuses on the syntactic similar but not identical code regions and performs adaptive changes to multiple edit locations. 
+
+\noindent {\textbf{Program synthesis and code completion}}
+%1. DND Refactoring -refactoring + Cookbook
+%2. IDE track change
+It is common that the programmer knows what type of object he
+needs, but does not know how to write the code to get the object. Program synthesis tools, such as Jungloid Mining \cite{bodik:jungloid05} and CodeHint \cite{bodik:codehit14}, search for a chain of method calls to complete the calling path at runtime based on specifications. SemFix \cite{nguyen:semfix13} automatically repairs methods based on symbolic execution, constraint solving and program synthesis while MintHint  \cite{orso:minthint13}  identifies expression based on the repaired pattern and synthesize repair hints from these expressions. GenProg \cite{claire:genprog12}  is another automatic program repair tool which uses generic programming to synthesize potential bug-fixes based on test suites. Different from these search based program synthesis tools, our approach focuses on transforming systematic edits with syntactic consistency across multiple edit locations. 
+
+%Other automatic program repair tools such as GenProg 
+
+GraPacc \cite{nguyen:graph} extracts context features, rank the best matched pattern from the database and fill in the code automatically. Yet these tools are confined to the pre-defined specifications or API usage patterns while in our approach, developers can customize the systematic edit template on the fly before applying the transformation to the target code region. Our prior work, Cookbook \cite{john:cookbook}, automatically matches the incoming edit stream against multiple edit recipes, trying to find the most suitable recipe without requiring users to  specify the recipe they prefer to apply. Yet it does not recognize naming patterns between related types and variables, and fails to evaluation the consequence of the transformation based on the control dependency in the target code fragment. ClipBoard overcomes both these limitations of CookBook with a straightforward drag-and-drop script generation process.  
+These interaction process is similar to the Drag-and-drop Refactoring \cite{lee:dndrefactor}, which improves the invocation and completion approach of refactoring in an intuitive manner but is confined to a set of pre-defined refactoring templates.  Some code completion tools such as WitchDoctor \cite{foster:witchdoctor} and BeneFactor \cite{ge:benfactor},  detect manual refactoring on the fly and automatically complete the code according to the command  from  the developers. 
+
+Eclipse Content Assist \cite{eclipse:recommend} provides couple of auto-completion engines and suggests available methods based on live editing stream. Yet pre-defined transformation templates are required and Eclipse Content Assist does not consider the control and data dependency and thus might inject some errors when performing systematic edit transformation.  %Omar et.al. \cite{omar:specialize} integrate specialized code completion interfaces into a developer’s workﬂow while 
+%Bruch et.al. \cite{bruch:rank} and Robbes et.al. \cite{ robbes:history} improve the order of the code completion recommendation based on the code repository history. 
+
+
+
+\noindent {\textbf{Speculative Transformation}}
+Codebase Replication \cite{muslu:offline, muslu:implicate} maintains a copy of developer's codebase, makes that copy codebase available for offline analyses to run without disturbed by the developer, and  implicates the potential offline code changes  continuously. Another proactive analysis tool\textendash Quick Fix Scout \cite{muslu:scout}, aims to check the consequence of the quick fix recommendation in Eclipse platform and inform the developers of the potential conflicts after applying the quick fix. It maintains a hidden copy of the source file that is under editing and fore-apply the quick fix separately at the background without affecting the workspace.  ClipBoard focuses on systematic edit checking before it is actually applied to the source code, rather than general code changes or quick fix recommendations. Our approach can also proactively check multiple edit locations of the given transformation template.  
+
+Different from change impact analysis tools such as Chianti \cite{ren:chianti05} that analyzes the changes between two versions of the applications based on the call graph for regression test selection, we consider control and data dependency when we generate the transformation code not when we check the consequence of the transformation. 
+Our approach proactively applies the transformation to the source code and invokes Eclipse compilation error checker to identify compilation errors before undoing the change to the original version of the codebase. 
+
+Our tool is also different from the harmfulness evaluation of the code clone \cite{wang:cloneevaluate12}, which uses  machine learning technique to investigate common characters that indicate potential harmfulness. We recommend developers with compilation errors that will be invoked after applying the transformation in a concrete manner rather than inform them of the high-level harmfulness analysis. 
+% implicates the potential offline code changes  continuously and informs the developer of the potential changes as quickly as possible after the change is made. %Codebase Replication copies the developer's codebase, incrementally keeps this copy codebase in sync with the developer's codebase, makes that copy codebase available for offline analyses to run without disturbing the developer and without the developer's changes disturbing the analyses, and makes analysis results available to be presented to the developer.
+
+  
+
+%Aligned with these works on consequence evaluation, we conduct a more fine-grained impact evaluation on the program transformation results in our program transformation and code completion tool.
+%3. impact analysis for changes
+%3. Auto program repair 
+%\noindent {\textbf{Programming Synthesis}} 
+%1. program by demonstration , search based software engineering
+
+%2. Semfix+Jungloid+CHESS+CodeHint+MintHint
+%3. Portfolio: recommend relevant function
+%4. parameter recommendation
+
+
+
+
+%%start from related work
+\noindent {\textbf{Naming Pattern}}
+Lawrie et.al \cite{lawrie:studyindentifier06} conduct a  comprehensive study of identifier names  and they find that there is no statistical difference between full words and abbreviations in many cases. Caprile et.al. \cite{caprile:reconstruct00} reconstruct identifier names based on both  standard lexicon and standard syntax, yet it is confined to pre-defined naming standards. 
+
+Butler et.al.  \cite{butler:classname11}  conduct an empirical study of  conventional  Java class naming patterns and patterns of class names related to inheritance by identifying common grammatical structures of Java class identifiers.  Singer et.al. \cite{singer:pattern08} consider semantic information encoded in Java class names  and create  a prototype to inform programmers of particular problems or optimization opportunities in their code based on the naming patterns.
+H{\o}st et.al. \cite{einar:debugname09} exploit  whether or not a method name and implementation are likely to be good matches for each other and provide a simple pattern-based naming recommendation approach to evaluate reasonable names for the identifiers.  Kashiwabara et.al \cite{yuki:verbrecommend14} recommend candidate verbs for method names based on the association rules extracted from similar code fragments and help developers consistently use various verbs in method names. Aligned with the idea of extracting association rules from similar code fragments, we construct recommended variable names based on the related contexts of the systematic edits. Our approach is able to generate multiple reasonable names for different edit locations based on the naming patterns.
+%The functions include standard algorithms studied in computer science courses as well as functions extracted from production code. The results show that full word iden- tifiers lead to the best comprehension; however, in many cases, there is no statistical difference between full words and abbreviations.
+
+%%% parameter and name recommendation
+%GraPacc extracts API usage patterns with relevant context and control/data dependency. Once users query for the code completion, GraPacc extracts context features, rank the best matched pattern and fill in the code. Yet it requires developers manually input API usage pattern to extend its capability.  However, Cookbook assigns equal weight to each nodes that matches transformation template in syntax level without considering the relevance and popularity of different templates. 
+
+
+%\noindent {\textbf{Naming Recommendation}}
+%1. recommend method name+structure context matching+ IR concept location
+%2. recommend verb name
+%3. mining identifier naming

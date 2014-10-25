@@ -1,0 +1,73 @@
+\section{Approach}\label{sec:approach}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.5\textwidth]{fig/sequence.png}
+\caption{Workflow of SyditRecommender. The boundary of SyditRecommender is illustrated with dotted box}
+\label{fig:sequence}
+\end{figure}
+
+
+Figure~\ref{fig:sequence} shows the workflow of SyditRecommender. Users can define new edit recipes by demonstrating examples to Recommendation Generator. Our tool applies an AST differencing algorithm to create an edit script and generates the most specific edit scripts. At the same time, our tool automatically investigates all similar edits in package level and stores both the edit recipe as well as the occurrence of the similar systematic changes to the Edit Script Library in the format of XML file. We extend the generation and detection mechanisms of edit scripts in Sydit \cite{meng:sydit} and LASE \cite{meng:lase} so that our tool can locate all similar edits in package level automatically once a new recipe is demonstrated.  The information we store in edit script library includes context information, edit operations and corresponding occurrence for each recipe. 
+
+SyditRecommender monitors user's editing stream and simultaneously matches the context with all the recipes in the library. Section~\ref{sec:matcher} details the matching algorithm while Recommendation Filter in section~\ref{sec:filter} depicts how our tool filters out irrelevant recipes with respect to un-matching edit operations for different the scripts. Section~\ref{sec:checker} describes the mechanism we use to compute the consequence of the systematic transformation. 
+
+Finally, we call the content assist engine (also known as code completion engine) in Eclipse to display the ranked candidate recipe list in a pop-up menu regarding the relevance and popularity. And developers can review the potential consequence and the corresponding preview of the selected program transformation rule. After comparing different edit recipes, the developers select the preferred one with a simple click on the menu option and the transformation rule is directly applied to the target program. 
+More details of our tool are described below with respect to how SyditRecommender matches with the context, filters out the irrelevant recipes regarding the editing operations and evaluates the dependency conflicts and compilation errors that might cause after performing the preferred proposal.
+
+
+\subsection {Recommendation Matcher}\label{sec:matcher}
+
+
+\begin{algorithm}
+\caption{Pseudocode For the Matcher}
+\label{alg:match}
+\begin{algorithmic} 
+\STATE  Function \{getCandidateScripts\} \{context, script list\}
+%$n \geq 0 \vee x \neq 0$
+%\ENSURE $y = x^n$
+ \FORALL {script $\in$  scriptLibrary} 
+ \STATE weight := 0
+  \STATE weight += forward search the concrete identifiers in the script 
+    \STATE weight +=  forward search the generic identifiers in the script 
+      \STATE weight +=  backward search the concrete identifiers in the script
+  \STATE weight +=  backward search the generic identifiers in the script
+   \STATE weight += occurrenceWeight of the script
+  \IF {weight $> $ threshold}
+  \STATE add script to the candidate list
+  \ENDIF
+
+    \ENDFOR
+  \STATE sort the candidate list based on the matching weight
+\RETURN candidate list
+\STATE EndFunction
+
+%\STATE  Function \{matchContext\} \{mTreeRoot, sTreeRoot, match\}
+%%$n \geq 0 \vee x \neq 0$
+%%\ENSURE $y = x^n$
+%
+% \FORALL {sNode: sTreeRoot.children} 
+% \IF {sNode.hasChildren == NULL \AND match}
+% \RETURN match
+%\ELSE 
+%\STATE    treeNode $\leftarrow$ mTree.breathFirstEnumeration()   
+%\WHILE {treeNode.hasElements() }
+%  \IF {node.matches(treeNode.nextElement) }
+%  \RETURN matchContext(treeNode, sNode, TRUE)
+%  \ENDIF
+%   \ENDWHILE
+%    \ENDIF
+%\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+Given the input stream edits, SyditRecommender searches for the method context in each edit recipe in the script library. The goal of the matching algorithm shown in Algorithm~\ref{alg:match} is to find the most suitable scripts that matches for the current context in the sense that similar changes are more likely to happen between the code snippets with similar contexts. Aligned with matching technique in \cite{meng:sydit, meng:lase}, we conduct search for the concrete type, method and variable names exactly as it is, as well as the abstract identifiers by its syntax nodes. Here the concrete identifiers indicate concrete class name or keywords. For instance, in the statement  \codefont{Iterator it = new Iterator()}, the node \codefont{=},  \codefont{new}  and  \codefont{Iterator} are identical in all examples yet the variable name  \codefont{it} is different and is abstracted to a generic identifier  \codefont{ v\$0} .   By overriding the forward completion and backward completion functions in content assist engine, we analyze both upstream dependency and downstream dependency of the context. As a result, we get two lists of suggestions from edit templates. In the next step, we take the occurrence for each script into consideration and calculate the matching weight for each script. We finally rank all the candidate recipes whose matching weight is beyond the threshold. 
+
+
+\subsection {Recommendation Filter}\label{sec:filter}
+All the candidate scripts are further elaborated with the edit operations of \textit{\textbf{DELETE, INSERT, MOVE, UPDATE}} aligned with \cite{meng:sydit}. For example, the line 2 in Figure~\ref{fig:motivateExample} will be abstracted as  \codefont{ $e_{A} $ = \textbf{delete}(if (container == null )}. SyditRecommender keeps 2 versions of the editing file before and after each keystroke, and collects the editing operation for the edit stream, trying to match it with the candidate scripts. If the user is deleting the statement, then our tool will try to match the edit operations with the type of \textit{\textbf{DELETE}} in the candidate edit recipes. 
+%The filter algorithm is precisely supported by the edit scripts 
+
+\subsection {Recommendation Checker}\label{sec:checker}
+We leverage the speculative analysis idea in Quick Fix Scount \cite{muslu:scout} to evaluate the potential consequence after applying the program transformation proposal. We keep a hidden version for the current editing file with synchronous update to the latest version. With this experimental copy, we safely apply the selected edit proposal and evaluate the consequence of this transformation before the transformation is applied to the real source file. We also facilitate the \textit{uodo change} in Eclipse API that rolls back the associated proposal application to recover the separate copy from one transformation rule and switch to the next one.    
+
